@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-signin-client_id" content="493830140157-o9ru1hs84lkscmupamj6u5r9tqdbv9qu.apps.googleusercontent.com">
+    <title>HOOPSPOINT CMS</title>
+    <!-- CSS only -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" href="style.css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+</head>
+<body>
+    <div id="app">
+        <!-- START LOGIN -->
+        <section class="login-block">
+            <div class="container1">
+                <div class="row">    
+                    <div class="col-md-4 banner-sec">   
+                        <div class="signup__overlay"></div>          
+                        <div class="banner">
+                            <div id="demo" class="carousel slide carousel-fade" data-ride="carousel">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8 login-sec">
+                        <h2 class="text-center">LOGIN CMS</h2>
+                        <form class="login-form validate-form" @submit.prevent="formLogin">
+                            <div class="wrap-input100 validate-input">
+                                <span class="label-input100 text-lg"><strong>Email</strong></span>
+                                <input class="input" type="text" name="email" v-model="email">
+                                <!-- <span class="focus-input100"></span> -->
+                            </div>
+                            <div class="wrap-input100 validate-input">
+                                <span class="label-input100"><strong>Password</strong></span>
+                                <input class="input" type="password" name="password" v-model="password">
+                                <!-- <span class="focus-input100 password"></span> -->
+                            </div>
+                            <div class="container-login-form-btn">
+                                <div class="wrap-login-form-btn">
+                                    <button class="btn btn-primary mr-2" @click.prevent="changePage('login')">
+                                        Login
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- END LOGIN -->
+        <!-- START NAV -->
+        <div>
+            <nav class="mb-4 navbar navbar-expand-lg navbar-dark bg-unique">
+                <a class="navbar-brand" href="#">
+                    <img src="./img/logo.png" alt="" width="75" height="30" class="d-inline-block align-text-top">
+                        CMS
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-3" aria-controls="navbarSupportedContent-3" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent-3">
+                    <ul class="navbar-nav ml-auto nav-flex-icons">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> 
+                                </a>
+                            <div class="dropdown-menu dropdown-menu-right dropdown-unique" aria-labelledby="navbarDropdownMenuLink">
+                                <span class="dropdown-item">user@mail.com</span>
+                                <a class="dropdown-item" href="#">Logout</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <!-- END NAV -->
+            <div>
+                <!-- START TITLE-->
+                <div class="text-center">
+                    <h2 class="m-3"><strong>==WELCOME TO HOOPSPOINT CMS==</strong></h2>
+                    <button type="button" class="btn btn-primary m-3" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Product Here</button>
+                </div>
+                <!-- END TITLE-->
+                <!-- START MODAL ADD-->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title text-center" id="exampleModalLabel">Add Product</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Product Name:</label>
+                                    <input type="text" class="" id="name" v-model="name">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="image_url" class="form-label">Image Url:</label>
+                                    <input type="text" class="" id="image_url" v-model="image_url">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="category" class="form-label">Category:</label>
+                                    <input type="text" class="" id="category" v-model="category">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="price" class="form-label">Price:</label>
+                                    <input type="text" class="" id="price" v-model="price">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="stock" class="form-label">Stock:</label>
+                                    <input type="number" class="" id="stock" min="1" v-model="stock">
+                                </div>
+                                <div>
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" @click.prevent="addKanban">Add</button>
+                                </div>
+                            </form>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END MODAL ADD -->
+            </div>
+            <!-- START CONTENT PRODUCT -->
+            <div class="container mt-3">
+                <h2 class="m-2">Product List</h2>
+                <div class="row">
+                    <div class="card shadow-lg bg-white rounded1 m-4" style="max-width: 22vw">
+                        <div class="card-body text-center">
+                            <img src="./img/JORDAN WHY NOT ZER0.4.jpg" alt="" style="max-width: 18vw">
+                            <h4 class="m-3">JORDAN WHY NOT ZER0.4 PF "GRAFFITI"</h4>
+                            <p>Category : Shoes</p>
+                            <p>Price : 1.979.000</p>
+                            <p>Stock : 10</p>
+                            <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal1"><img src="./img/edit.png" alt="edit" width="25rem" height="25rem"></a> |
+                            <a href=""><img src="./img/delete.png" alt="delete" width="25rem" height="25rem"></a>
+                        </div>
+                    </div>
+                    <div class="card shadow-lg bg-white rounded1 m-4" style="max-width: 22vw">
+                        <div class="card-body text-center">
+                            <img src="./img/JORDAN WHY NOT ZER0.4.jpg" alt="" style="max-width: 18vw">
+                            <h4 class="m-3">JORDAN WHY NOT ZER0.4 PF "GRAFFITI"</h4>
+                            <p>Category : Shoes</p>
+                            <p>Price : 1.979.000</p>
+                            <p>Stock : 10</p>
+                            <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal1"><img src="./img/edit.png" alt="edit" width="25rem" height="25rem"></a> |
+                            <a href=""><img src="./img/delete.png" alt="delete" width="25rem" height="25rem"></a>
+                        </div>
+                    </div>
+                    <div class="card shadow-lg bg-white rounded1 m-4" style="max-width: 22vw">
+                        <div class="card-body text-center">
+                            <img src="./img/JORDAN WHY NOT ZER0.4.jpg" alt="" style="max-width: 18vw">
+                            <h4 class="m-3">JORDAN WHY NOT ZER0.4 PF "GRAFFITI"</h4>
+                            <p>Category : Shoes</p>
+                            <p>Price : 1.979.000</p>
+                            <p>Stock : 10</p>
+                            <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal1"><img src="./img/edit.png" alt="edit" width="25rem" height="25rem"></a> |
+                            <a href=""><img src="./img/delete.png" alt="delete" width="25rem" height="25rem"></a>
+                        </div>
+                    </div>
+                    <div class="card shadow-lg bg-white rounded1 m-4" style="max-width: 22vw">
+                        <div class="card-body text-center">
+                            <img src="./img/JORDAN WHY NOT ZER0.4.jpg" alt="" style="max-width: 18vw">
+                            <h4 class="m-3">JORDAN WHY NOT ZER0.4 PF "GRAFFITI"</h4>
+                            <p>Category : Shoes</p>
+                            <p>Price : 1.979.000</p>
+                            <p>Stock : 10</p>
+                            <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal1"><img src="./img/edit.png" alt="edit" width="25rem" height="25rem"></a> |
+                            <a href=""><img src="./img/delete.png" alt="delete" width="25rem" height="25rem"></a>
+                        </div>
+                    </div>
+                    <div class="card shadow-lg bg-white rounded1 m-4" style="max-width: 22vw">
+                        <div class="card-body text-center">
+                            <img src="./img/JORDAN WHY NOT ZER0.4.jpg" alt="" style="max-width: 18vw">
+                            <h4 class="m-3">JORDAN WHY NOT ZER0.4 PF "GRAFFITI"</h4>
+                            <p>Category : Shoes</p>
+                            <p>Price : 1.979.000</p>
+                            <p>Stock : 10</p>
+                            <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal1"><img src="./img/edit.png" alt="edit" width="25rem" height="25rem"></a> |
+                            <a href=""><img src="./img/delete.png" alt="delete" width="25rem" height="25rem"></a>
+                        </div>
+                    </div>
+                    <div class="card shadow-lg bg-white rounded1 m-4" style="max-width: 22vw">
+                        <div class="card-body text-center">
+                            <img src="./img/JORDAN WHY NOT ZER0.4.jpg" alt="" style="max-width: 18vw">
+                            <h4 class="m-3">JORDAN WHY NOT ZER0.4 PF "GRAFFITI"</h4>
+                            <p>Category : Shoes</p>
+                            <p>Price : 1.979.000</p>
+                            <p>Stock : 10</p>
+                            <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal1"><img src="./img/edit.png" alt="edit" width="25rem" height="25rem"></a> |
+                            <a href=""><img src="./img/delete.png" alt="delete" width="25rem" height="25rem"></a>
+                        </div>
+                    </div>
+                </div>  
+            </div>
+        </div>
+        <!-- END CONTENT PRODUCT -->
+        <!-- START MODAL EDIT-->
+        <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title text-center" id="exampleModalLabel">Edit Product</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Product Name:</label>
+                            <input type="text" class="" id="name" v-model="name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="image_url" class="form-label">Image Url:</label>
+                            <input type="text" class="" id="image_url" v-model="image_url">
+                        </div>
+                        <div class="mb-3">
+                            <label for="category" class="form-label">Category:</label>
+                            <input type="text" class="" id="category" v-model="category">
+                        </div>
+                        <div class="mb-3">
+                            <label for="price" class="form-label">Price:</label>
+                            <input type="text" class="" id="price" v-model="price">
+                        </div>
+                        <div class="mb-3">
+                            <label for="stock" class="form-label">Stock:</label>
+                            <input type="number" class="" id="stock" min="1" v-model="stock">
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" @click.prevent="addKanban">Update</button>
+                        </div>
+                    </form>
+                </div>
+                </div>
+            </div>
+        </div>
+        <!-- END MODAL EDIT -->
+    </div>
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <script src="./main.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.1/js/mdb.min.js"></script>
+</body>
+</html>
